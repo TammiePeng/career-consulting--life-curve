@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>我的生命歷程圖</title>
+<title>生命歷程線</title>
 <style>
 :root{--bg:#faf8f4;--card:#fff;--ink:#2d3a2a;--sub:#6b7168;--line:#d9d9d4;--accent:#2d6e5e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171b18;--card:#222823;--ink:#e6eee1;--sub:#a3ab9f;--line:#3a443b;--accent:#3f8f7a;color-scheme:dark}}
@@ -67,7 +67,7 @@ function render(){
   const sub=[nm?'姓名：'+esc(nm):'',d.length==3?`製作日期：${+d[1]}/${+d[2]}`:''].filter(Boolean).join('　');
   const T=(x,y,sz,t,extra='')=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz}" font-family="${FONT}" ${extra}>${t}</text>`;
   let h=`<rect id="bg" width="${W}" height="${H}" fill="#fff"/>`+
-  T(W/2,M?52:62,M?30:38,'我的生命歷程圖',`font-weight="700" fill="#4f7d2a"`)+
+  T(W/2,M?52:62,M?30:38,'生命歷程線',`font-weight="700" fill="#4f7d2a"`)+
   T(W/2,M?82:92,15,sub,'fill="#777"')+
   `<rect x="${bx}" y="${Y0-10}" width="${bw}" height="${Y1-Y0+20}" rx="8" fill="none" stroke="#9db58a" stroke-width="2"/>`+
   T(ax,Y0+30,20,'高','fill="#555"')+T(ax,Y0+56,20,'峰','fill="#555"')+T(ax,Y0+82,22,'＋','fill="#555"')+
@@ -150,7 +150,7 @@ const DL={save:({filename,data})=>{const u=URL.createObjectURL(data),a=document.
 function say(t){$('#note').textContent=t}
 async function save(kind){
   if(!DL)return;
-  const nm=$('#name').value.trim(),base='生命歷程圖'+(nm?'_'+nm:'');
+  const nm=$('#name').value.trim(),base='生命歷程線'+(nm?'_'+nm:'');
   try{
     if(kind==='png'){const r=await toCanvas('image/png');await DL.save({filename:base+'.png',data:r.b})}
     else{const r=await toCanvas('image/jpeg');const jpg=new Uint8Array(await r.b.arrayBuffer());await DL.save({filename:base+'.pdf',data:buildPDF(jpg,r.w,r.h)})}
