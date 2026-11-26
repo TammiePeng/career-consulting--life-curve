@@ -1,284 +1,162 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8">
+<html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>生命平衡輪:現狀與理想</title>
+<title>我的生命歷程圖</title>
 <style>
-:root{--bg:#fbfaf7;--card:#ffffff;--ink:#26332f;--sub:#5d6b66;--line:#d3dbd7;--soft:#eef2f0;--accent:#2f6f62;--accent-ink:#ffffff;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b2220;--card:#232c29;--ink:#e8eeeb;--sub:#a3b1ab;--line:#3a4642;--soft:#2a3431;--accent:#6fc2b0;--accent-ink:#10201c}}
-:root[data-theme="dark"]{--bg:#1b2220;--card:#232c29;--ink:#e8eeeb;--sub:#a3b1ab;--line:#3a4642;--soft:#2a3431;--accent:#6fc2b0;--accent-ink:#10201c}
+:root{--bg:#faf8f4;--card:#fff;--ink:#2d3a2a;--sub:#6b7168;--line:#d9d9d4;--accent:#2d6e5e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171b18;--card:#222823;--ink:#e6eee1;--sub:#a3ab9f;--line:#3a443b;--accent:#3f8f7a;color-scheme:dark}}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;line-height:1.65;-webkit-text-size-adjust:100%}
-main{max-width:720px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:24px;font-weight:600;margin:0 0 4px}
-.lead{color:var(--sub);font-size:15px;margin:0 0 16px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--soft);padding:5px;border-radius:12px;margin-bottom:10px}
-.tabs button{font:inherit;font-size:16px;font-weight:600;padding:11px 8px;border:0;border-radius:9px;background:transparent;color:var(--sub);cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
-.hint{font-size:14px;color:var(--sub);margin:0 0 10px;min-height:46px}
-.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--sub);margin:4px 0 0;justify-content:center}
-.legend i{display:inline-block;vertical-align:middle;margin-right:6px}
-.chip{width:14px;height:10px;border-radius:2px;background:#9A8CC0;opacity:.95}
-.arc{width:18px;height:0;border-top:3px solid #D26A6A;border-radius:2px}
-svg{display:block;width:100%;height:auto}
-svg .ring{fill:none;stroke:var(--line)}
-svg .lbl{fill:var(--ink);font-size:17px;font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;font-weight:600}
-svg .num{fill:var(--sub);font-size:14px;font-family:system-ui,sans-serif}
-svg .tick{fill:var(--sub);font-size:10px;font-family:system-ui,sans-serif}
-.rows{margin-top:14px}
-.row{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px 8px;margin-bottom:8px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.name{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600}
-.sw{width:11px;height:11px;border-radius:3px}
-.other{font-size:13px;color:var(--sub)}
-.ctl{display:flex;align-items:center;gap:12px}
-.ctl input{flex:1;min-width:0;height:34px;accent-color:var(--accent)}
-.ctl b{width:26px;text-align:right;font-size:20px;font-variant-numeric:tabular-nums}
-.sum{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:16px}
-.sum h2{font-size:16px;margin:0 0 8px;font-weight:600}
-.sum ul{list-style:none;margin:0;padding:0}
-.sum li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:15px}
-.sum li:first-child{border-top:0}
-.gap{font-weight:600;color:var(--accent)}
-.avgs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.avgs div{background:var(--soft);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--sub)}
-.avgs b{display:block;font-size:20px;color:var(--ink)}
-.foot{margin-top:16px;font-size:14px;color:var(--sub)}
-.nm{display:block;margin-bottom:10px}
-.nm input{display:block;width:100%;margin-top:4px;font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
-.acts{display:flex;flex-wrap:wrap;gap:8px}
-.acts[hidden]{display:none}
-.foot .pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
-#dlnote{margin:10px 0 0}
-#dlmsg{margin:6px 0 0;min-height:20px}
-.foot button{font:inherit;font-size:14px;padding:9px 16px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;cursor:pointer;margin-top:8px}
-button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-</style>
-</head>
-<body>
-<main>
-<h1>生命平衡輪</h1>
-<p class="lead">看看現在的生活,和你想要的生活,差在哪裡。</p>
-
-<div class="tabs" role="tablist" aria-label="評分模式">
-  <button role="tab" id="tab-cur" aria-selected="true" type="button">① 目前現狀</button>
-  <button role="tab" id="tab-ide" aria-selected="false" type="button">② 理想狀態</button>
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;padding:16px 16px 40px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto}
+#box{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+svg{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.edit{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.edit label{font-size:15px;color:var(--sub);width:100%}
+.hint{font-size:13px;color:var(--sub);margin:10px 2px 0}
+.form{margin-top:28px}
+.form label.l{display:block;color:var(--sub);margin:18px 0 8px;font-size:16px}
+input[type=text],input[type=date]{font:inherit;font-size:16px;width:100%;box-sizing:border-box;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);min-height:52px}
+.edit input{flex:1;min-width:0;width:auto}
+button{font:inherit;font-size:16px;font-weight:700;padding:14px 22px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;min-height:48px}
+button.ghost{background:var(--card);color:var(--ink);border-color:var(--line);font-weight:400}
+button:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.row[hidden]{display:none}
+.note{color:var(--sub);font-size:15px;margin:16px 0 0}
+#reset{margin-top:36px}
+@media print{body{background:#fff;padding:0}.edit,.hint,.form{display:none}#box{box-shadow:none}}
+</style></head><body>
+<div class="wrap">
+<div id="box"><svg id="c" xmlns="http://www.w3.org/2000/svg"></svg></div>
+<div class="edit">
+  <label for="txt">選取的事件內容</label>
+  <input type="text" id="txt" placeholder="先在圖上點一下新增事件，再在這裡輸入" disabled>
+  <button class="ghost" id="del" disabled>刪除此點</button>
 </div>
-<p class="hint" id="hint"></p>
+<p class="hint">在圖上空白處點一下新增事件（越高越是高峰，越低越是低谷）；拖曳圓點可調整時間（左右）與高低（上下）。</p>
 
-<svg id="wheel" viewBox="0 0 520 420" role="img" aria-label="生命平衡輪,色塊為現狀,紅色弧線為理想"></svg>
-<div class="legend">
-  <span><i class="chip"></i>色塊:目前現狀</span>
-  <span><i class="arc"></i>紅色弧線:理想狀態</span>
+<div class="form">
+  <label class="l" for="name">姓名(選填,會顯示在圖片上)</label>
+  <input type="text" id="name" autocomplete="off">
+  <label class="l" for="date">製作日期</label>
+  <input type="date" id="date">
+  <div class="row" id="dlrow">
+    <button id="png">下載圖片 (PNG)</button>
+    <button id="pdf">下載 PDF</button>
+  </div>
+  <p class="note" id="note">完成後,按上面的按鈕保存結果,再傳給你的諮詢師。也可以直接用手機截圖。</p>
+  <button class="ghost" id="reset">重新開始</button>
 </div>
-
-<div class="rows" id="rows"></div>
-
-<div class="avgs">
-  <div>現狀平均<b id="avgC">5.0</b></div>
-  <div>理想平均<b id="avgI">5.0</b></div>
 </div>
-
-<div class="sum">
-  <h2>最想優先調整的面向</h2>
-  <ul id="gaps"></ul>
-</div>
-
-<div class="foot">
-<label class="nm">姓名(選填,會顯示在圖片上)<input id="cname" type="text" maxlength="20" autocomplete="off"></label>
-<label class="nm">測試日期<input id="cdate" type="date"></label>
-<div class="acts" id="acts" hidden>
-<button id="dlpng" type="button" class="pri">下載圖片 (PNG)</button>
-<button id="dlpdf" type="button" class="pri">下載 PDF</button>
-</div>
-<p id="dlnote">完成後,請用手機截圖保存,再傳給你的諮詢師。</p>
-<p id="dlmsg" role="status"></p>
-<button id="reset" type="button">重新開始</button>
-</div>
-</main>
 <script>
-var items=[
-{n:'心理靈性',c:'#9A8CC0'},{n:'理財與經濟狀況',c:'#E3B873'},{n:'工作任務/職業',c:'#D08A6C'},{n:'健康與體態',c:'#7A9BB5'},{n:'休閒娛樂',c:'#A5AF63'},
-{n:'生活環境',c:'#6FA8A3'},{n:'社群與社團',c:'#A68A74'},{n:'家庭與朋友',c:'#6F7FA8'},{n:'愛與伴侶',c:'#D9808A'},{n:'學習與成長',c:'#86AE88'}];
-var N=items.length,DEF=5;
-var cur=items.map(function(){return DEF}),ide=items.map(function(){return DEF});
-var mode='cur';
-var cx=260,cy=205,R=125,seg=360/N,ns='http://www.w3.org/2000/svg';
-var svg=document.getElementById('wheel');
-function el(t,a,txt){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;return e}
-function pt(r,d){var a=d*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)]}
-var hints={cur:'請問自己:這一個月以來,我在每個面向的真實感受是幾分?',ide:'請問自己:如果生活是我想要的樣子,每個面向我希望達到幾分?'};
-
-function draw(){
-  while(svg.firstChild)svg.removeChild(svg.firstChild);
-  for(var k=1;k<=10;k++)svg.appendChild(el('circle',{cx:cx,cy:cy,r:R*k/10,'class':'ring','stroke-width':k===10?1.3:.6}));
-  items.forEach(function(_,i){var p=pt(R,-90+i*seg-seg/2);svg.appendChild(el('line',{x1:cx,y1:cy,x2:p[0],y2:p[1],'class':'ring','stroke-width':.6}))});
-  items.forEach(function(it,i){
-    var mid=-90+i*seg,a0=mid-seg/2+1,a1=mid+seg/2-1,r=R*cur[i]/10;
-    var p0=pt(r,a0),p1=pt(r,a1);
-    svg.appendChild(el('path',{d:'M'+cx+','+cy+' L'+p0[0]+','+p0[1]+' A'+r+','+r+' 0 0 1 '+p1[0]+','+p1[1]+' Z',fill:it.c,opacity:.95}));
-  });
-  items.forEach(function(it,i){
-    var mid=-90+i*seg,a0=mid-seg/2+1,a1=mid+seg/2-1,r=R*ide[i]/10;
-    var q0=pt(r,a0),q1=pt(r,a1);
-    svg.appendChild(el('path',{d:'M'+q0[0]+','+q0[1]+' A'+r+','+r+' 0 0 1 '+q1[0]+','+q1[1],fill:'none',stroke:'#D26A6A','stroke-width':3.5,'stroke-linecap':'round'}));
-  });
-  items.forEach(function(it,i){
-    var mid=-90+i*seg,lp=pt(R+12,mid),s=Math.sin(mid*Math.PI/180);
-    var an=Math.abs(lp[0]-cx)<10?'middle':(lp[0]>cx?'start':'end');
-    var y=lp[1]+s*8-6+(s>0.9?10:0);
-    svg.appendChild(el('text',{x:lp[0]-(an==='end'&&s>0.5?12:0),y:y,'text-anchor':an,'class':'lbl'},it.n));
-    svg.appendChild(el('text',{x:lp[0]-(an==='end'&&s>0.5?12:0),y:y+17,'text-anchor':an,'class':'num'},'現'+cur[i]+' → 理'+ide[i]));
-  });
-  for(var s2=2;s2<=10;s2+=2)svg.appendChild(el('text',{x:cx+3,y:cy-R*s2/10+11,'class':'tick'},s2));
-  summary();
+const $=s=>document.querySelector(s), svg=$('#c'), FONT='Noto Sans TC,PingFang TC,Microsoft JhengHei,sans-serif';
+let pts=[],sel=null,uid=1,W=1000,H=640,M=false,G={};
+$('#date').value=new Date().toISOString().slice(0,10);
+const esc=t=>t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const wrap=t=>{const L=[];for(let i=0;i<t.length;i+=7)L.push(t.slice(i,i+7));return L.slice(0,4)};
+function geo(){
+  M=$('#box').clientWidth<640;W=M?640:1000;H=M?860:640;
+  const bx=M?8:26,bw=M?50:62,Y0=M?140:150,Y1=H-50;
+  G={bx,bw,X0:bx+bw+57,X1:W-40,Y0,Y1,MID:(Y0+Y1)/2};
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
 }
-function summary(){
-  var a=function(x){return(x.reduce(function(p,q){return p+q},0)/N).toFixed(1)};
-  document.getElementById('avgC').textContent=a(cur);
-  document.getElementById('avgI').textContent=a(ide);
-  var list=items.map(function(it,i){return {n:it.n,c:cur[i],d:ide[i],g:ide[i]-cur[i]}})
-    .filter(function(x){return x.g>0}).sort(function(x,y){return y.g-x.g}).slice(0,3);
-  var ul=document.getElementById('gaps');ul.innerHTML='';
-  if(!list.length){var li=document.createElement('li');li.textContent='目前現狀已經達到或超過理想,很棒!';ul.appendChild(li);return}
-  list.forEach(function(x){
-    var li=document.createElement('li');
-    li.innerHTML='<span>'+x.n+'(現狀 '+x.c+' → 理想 '+x.d+')</span><span class="gap">差 '+x.g+' 分</span>';
-    ul.appendChild(li);
+const px=p=>G.X0+p.nx*(G.X1-G.X0), py=p=>G.Y0+p.ny*(G.Y1-G.Y0);
+function render(){
+  const {bx,bw,X0,X1,Y0,Y1,MID}=G, ax=bx+bw/2, s=[...pts].sort((a,b)=>a.nx-b.nx);
+  const d=$('#date').value.split('-'), nm=$('#name').value.trim();
+  const sub=[nm?'姓名：'+esc(nm):'',d.length==3?`製作日期：${+d[1]}/${+d[2]}`:''].filter(Boolean).join('　');
+  const T=(x,y,sz,t,extra='')=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz}" font-family="${FONT}" ${extra}>${t}</text>`;
+  let h=`<rect id="bg" width="${W}" height="${H}" fill="#fff"/>`+
+  T(W/2,M?52:62,M?30:38,'我的生命歷程圖',`font-weight="700" fill="#4f7d2a"`)+
+  T(W/2,M?82:92,15,sub,'fill="#777"')+
+  `<rect x="${bx}" y="${Y0-10}" width="${bw}" height="${Y1-Y0+20}" rx="8" fill="none" stroke="#9db58a" stroke-width="2"/>`+
+  T(ax,Y0+30,20,'高','fill="#555"')+T(ax,Y0+56,20,'峰','fill="#555"')+T(ax,Y0+82,22,'＋','fill="#555"')+
+  T(ax,Y1-88,20,'低','fill="#555"')+T(ax,Y1-62,20,'谷','fill="#555"')+T(ax,Y1-34,22,'－','fill="#555"')+
+  T(bx+bw+22,MID+6,17,'年齡','fill="#555"')+
+  `<line x1="${X0-10}" y1="${MID}" x2="${X1+30}" y2="${MID}" stroke="#444" stroke-width="2.5" stroke-dasharray="1 7" stroke-linecap="round"/>`;
+  if(s.length>1)h+=`<polyline points="${s.map(p=>px(p)+','+py(p)).join(' ')}" fill="none" stroke="#222" stroke-width="1.8"/>`;
+  const fs=M?20:18,lh=M?24:22;
+  s.forEach((p,i)=>{
+    const x=px(p),y=py(p),n=[s[i-1],s[i+1]].filter(Boolean);
+    const above=n.length?y<=n.reduce((a,q)=>a+py(q),0)/n.length:y<MID;
+    const L=wrap(p.text),y0=above?y-18-(L.length-1)*lh:y+32,tx=Math.min(Math.max(x,70),W-70);
+    h+=`<g data-id="${p.id}" style="cursor:grab;touch-action:none"><circle cx="${x}" cy="${y}" r="26" fill="transparent"/><circle cx="${x}" cy="${y}" r="${p.id===sel?15:11}" fill="#222" ${p.id===sel?'stroke="#4f7d2a" stroke-width="4"':''}/>`+
+    L.map((l,j)=>T(tx,y0+j*lh,fs,esc(l),'fill="#333" pointer-events="none"')).join('')+`</g>`;
   });
+  svg.innerHTML=h;
+  const p=pts.find(q=>q.id===sel);
+  $('#txt').disabled=$('#del').disabled=!p;
+  if(p&&document.activeElement!==$('#txt'))$('#txt').value=p.text;
+  if(!p)$('#txt').value='';
 }
-function rows(){
-  var box=document.getElementById('rows');box.innerHTML='';
-  var arr=mode==='cur'?cur:ide, other=mode==='cur'?ide:cur, ol=mode==='cur'?'理想':'現狀';
-  items.forEach(function(it,i){
-    var d=document.createElement('div');d.className='row';
-    d.innerHTML='<div class="top"><span class="name"><span class="sw" style="background:'+it.c+'"></span>'+it.n+'</span><span class="other">'+ol+' '+other[i]+' 分</span></div>'+
-      '<div class="ctl"><input type="range" min="1" max="10" step="1" value="'+arr[i]+'" aria-label="'+it.n+'"><b>'+arr[i]+'</b></div>';
-    box.appendChild(d);
-    d.querySelector('input').addEventListener('input',function(e){
-      var v=parseInt(e.target.value,10);arr[i]=v;
-      d.querySelector('b').textContent=v;draw();
-    });
-  });
-}
-function setMode(m){
-  mode=m;
-  document.getElementById('tab-cur').setAttribute('aria-selected',m==='cur');
-  document.getElementById('tab-ide').setAttribute('aria-selected',m==='ide');
-  document.getElementById('hint').textContent=hints[m];
-  rows();
-}
-document.getElementById('tab-cur').addEventListener('click',function(){setMode('cur');draw()});
-document.getElementById('tab-ide').addEventListener('click',function(){setMode('ide');draw()});
-document.getElementById('reset').addEventListener('click',function(){
-  for(var i=0;i<N;i++){cur[i]=DEF;ide[i]=DEF}
-  setMode('cur');draw();window.scrollTo(0,0);
+function pos(e){const q=svg.createSVGPoint();q.x=e.clientX;q.y=e.clientY;const r=q.matrixTransform(svg.getScreenCTM().inverse());
+  return{nx:Math.min(Math.max((r.x-G.X0)/(G.X1-G.X0),0),1),ny:Math.min(Math.max((r.y-G.Y0)/(G.Y1-G.Y0),0),1)}}
+let drag=null,tap=null;
+svg.addEventListener('pointerdown',e=>{
+  const g=e.target.closest('g[data-id]');
+  if(g){sel=+g.dataset.id;drag=sel;svg.setPointerCapture(e.pointerId);render();return}
+  tap={x:e.clientX,y:e.clientY,t:Date.now()};
 });
-var dl=null;
-function msg(t){document.getElementById('dlmsg').textContent=t}
-function renderReport(name){
-  var W=520,H=730,S=2,c=document.createElement('canvas');c.width=W*S;c.height=H*S;
-  var g=c.getContext('2d');g.scale(S,S);
-  var F='"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif';
-  g.fillStyle='#ffffff';g.fillRect(0,0,W,H);
-  g.textBaseline='alphabetic';g.textAlign='left';
-  g.fillStyle='#26332f';g.font='600 24px '+F;g.fillText('生命平衡輪:現狀與理想',20,36);
-  var dv=document.getElementById('cdate').value,ds=dv?dv.replace(/-/g,'/'):'';
-  g.fillStyle='#5d6b66';g.font='14px '+F;
-  g.fillText((name?name+'   ':'')+(ds?'測試日期 '+ds:''),20,58);
-  var ox=0,oy=60,P=Math.PI/180;
-  function q(r,deg){return [cx+ox+r*Math.cos(deg*P),cy+oy+r*Math.sin(deg*P)]}
-  g.strokeStyle='#d3dbd7';
-  for(var k=1;k<=10;k++){g.lineWidth=k===10?1.3:.6;g.beginPath();g.arc(cx,cy+oy,R*k/10,0,Math.PI*2);g.stroke()}
-  g.lineWidth=.6;
-  items.forEach(function(_,i){var p=q(R,-90+i*seg-seg/2);g.beginPath();g.moveTo(cx,cy+oy);g.lineTo(p[0],p[1]);g.stroke()});
-  items.forEach(function(it,i){
-    var mid=-90+i*seg,r=R*cur[i]/10;
-    g.globalAlpha=.95;g.fillStyle=it.c;g.beginPath();g.moveTo(cx,cy+oy);
-    g.arc(cx,cy+oy,r,(mid-seg/2+1)*P,(mid+seg/2-1)*P);g.closePath();g.fill();g.globalAlpha=1;
-  });
-  g.strokeStyle='#D26A6A';g.lineWidth=3.5;g.lineCap='round';
-  items.forEach(function(it,i){
-    var mid=-90+i*seg,r=R*ide[i]/10;
-    g.beginPath();g.arc(cx,cy+oy,r,(mid-seg/2+1)*P,(mid+seg/2-1)*P);g.stroke();
-  });
-  items.forEach(function(it,i){
-    var mid=-90+i*seg,lp=q(R+12,mid),s=Math.sin(mid*P);
-    var al=Math.abs(lp[0]-cx)<10?'center':(lp[0]>cx?'left':'right');
-    var y=lp[1]+s*8-6+(s>0.9?10:0);
-    g.textAlign=al;g.fillStyle='#26332f';g.font='600 17px '+F;g.fillText(it.n,lp[0]-(al==='right'&&s>0.5?12:0),y);
-    g.fillStyle='#5d6b66';g.font='14px '+F;g.fillText('現'+cur[i]+' → 理'+ide[i],lp[0]-(al==='right'&&s>0.5?12:0),y+17);
-  });
-  g.textAlign='left';
-  g.fillStyle=items[3].c;g.fillRect(110,498,16,11);
-  g.fillStyle='#5d6b66';g.font='13px '+F;g.fillText('色塊:目前現狀',132,508);
-  g.strokeStyle='#D26A6A';g.lineWidth=3;g.beginPath();g.moveTo(262,503);g.lineTo(282,503);g.stroke();
-  g.fillStyle='#5d6b66';g.fillText('紅色弧線:理想狀態',290,508);
-  var sum=function(x){return(x.reduce(function(p,r){return p+r},0)/N).toFixed(1)};
-  g.fillStyle='#26332f';g.font='600 15px '+F;
-  g.fillText('現狀平均 '+sum(cur)+'      理想平均 '+sum(ide),20,545);
-  g.font='600 16px '+F;g.fillText('最想優先調整的面向',20,585);
-  var list=items.map(function(it,i){return {n:it.n,c:cur[i],d:ide[i],g:ide[i]-cur[i]}})
-    .filter(function(x){return x.g>0}).sort(function(a,b){return b.g-a.g}).slice(0,3);
-  g.font='15px '+F;
-  if(!list.length){g.fillStyle='#5d6b66';g.fillText('目前現狀已經達到或超過理想。',20,614)}
-  list.forEach(function(x,i){
-    var y=614+i*28;
-    g.strokeStyle='#d3dbd7';g.lineWidth=.8;g.beginPath();g.moveTo(20,y-20);g.lineTo(500,y-20);g.stroke();
-    g.textAlign='left';g.fillStyle='#26332f';g.fillText(x.n+'(現狀 '+x.c+' → 理想 '+x.d+')',20,y);
-    g.textAlign='right';g.fillStyle='#2f6f62';g.font='600 15px '+F;g.fillText('差 '+x.g+' 分',500,y);g.font='15px '+F;
-  });
-  return c;
-}
-function toBlob(c,type,qu){return new Promise(function(res,rej){c.toBlob(function(b){b?res(b):rej(new Error('blob'))},type,qu)})}
-function makePdf(jpg,w,h){
-  var enc=new TextEncoder(),parts=[],off=[],len=0;
-  function push(x){var b=typeof x==='string'?enc.encode(x):x;parts.push(b);len+=b.length}
-  var pw=595,ph=Math.round(pw*h/w),pageH=Math.max(842,ph),py=Math.round((pageH-ph)/2);
-  push('%PDF-1.4\n');
-  off[1]=len;push('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
-  off[2]=len;push('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
-  off[3]=len;push('3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 '+pageH+'] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n');
-  off[4]=len;push('4 0 obj\n<< /Type /XObject /Subtype /Image /Width '+w+' /Height '+h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpg.length+' >>\nstream\n');push(jpg);push('\nendstream\nendobj\n');
-  var ct='q '+pw+' 0 0 '+ph+' 0 '+py+' cm /Im0 Do Q';
-  off[5]=len;push('5 0 obj\n<< /Length '+ct.length+' >>\nstream\n'+ct+'\nendstream\nendobj\n');
-  var xr=len;push('xref\n0 6\n0000000000 65535 f \n');
-  for(var i=1;i<=5;i++)push(String(off[i]).padStart(10,'0')+' 00000 n \n');
-  push('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF');
-  return new Blob(parts,{type:'application/pdf'});
-}
-function fname(ext){
-  var n=document.getElementById('cname').value.trim().replace(/[\\\/:*?"<>|]/g,'');
-  return '生命平衡輪'+(n?'_'+n:'')+'.'+ext;
-}
-async function saveAs(ext){
-  if(!dl)return;
-  msg('');
-  try{
-    var c=renderReport(document.getElementById('cname').value.trim()),blob;
-    if(ext==='png'){blob=await toBlob(c,'image/png')}
-    else{var jb=await toBlob(c,'image/jpeg',0.92);blob=makePdf(new Uint8Array(await jb.arrayBuffer()),c.width,c.height)}
-    await dl.save({filename:fname(ext),data:blob});
-    msg('已儲存。');
-  }catch(e){
-    if(e&&e.code==='declined')return;
-    msg('這個瀏覽器無法儲存檔案,請改用手機截圖保存。');
+svg.addEventListener('pointermove',e=>{if(drag==null)return;const p=pos(e),o=pts.find(q=>q.id===drag);if(o){o.nx=p.nx;o.ny=p.ny;render()}});
+svg.addEventListener('pointerup',e=>{
+  if(drag!=null){drag=null;return}
+  if(tap&&Math.abs(e.clientX-tap.x)<8&&Math.abs(e.clientY-tap.y)<8&&Date.now()-tap.t<600&&!e.target.closest('g[data-id]')){
+    const p=pos(e),o={id:uid++,nx:p.nx,ny:p.ny,text:'新事件'};pts.push(o);sel=o.id;render();
+    $('#txt').focus();$('#txt').select();
   }
+  tap=null;
+});
+svg.addEventListener('pointercancel',()=>{drag=null;tap=null});
+$('#txt').addEventListener('input',e=>{const p=pts.find(q=>q.id===sel);if(p){p.text=e.target.value;render()}});
+$('#del').onclick=()=>{pts=pts.filter(q=>q.id!==sel);sel=null;render()};
+$('#name').oninput=$('#date').oninput=render;
+let rt=null;
+$('#reset').onclick=function(){
+  if(!pts.length&&!$('#name').value)return;
+  if(this.dataset.arm){pts=[];sel=null;$('#name').value='';delete this.dataset.arm;this.textContent='重新開始';clearTimeout(rt);render();return}
+  this.dataset.arm=1;this.textContent='再按一次確認清空';
+  rt=setTimeout(()=>{delete this.dataset.arm;this.textContent='重新開始'},3000);
+};
+let rz=0;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{geo();render()},120)});
+
+function toCanvas(type){
+  sel=null;render();
+  const src=new XMLSerializer().serializeToString(svg).replace('<svg ',`<svg width="${W}" height="${H}" `);
+  return new Promise((res,rej)=>{
+    const img=new Image();
+    img.onload=()=>{const c=document.createElement('canvas');c.width=W*2;c.height=H*2;c.getContext('2d').drawImage(img,0,0,W*2,H*2);
+      c.toBlob(b=>b?res({b,w:c.width,h:c.height}):rej(),type,.92)};
+    img.onerror=rej;
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(src);
+  });
 }
-document.getElementById('dlpng').addEventListener('click',function(){saveAs('png')});
-document.getElementById('dlpdf').addEventListener('click',function(){saveAs('pdf')});
-dl={save:function(o){return new Promise(function(res,rej){
-  try{var a=document.createElement('a'),u=URL.createObjectURL(o.data);
-  a.href=u;a.download=o.filename;document.body.appendChild(a);a.click();document.body.removeChild(a);
-  setTimeout(function(){URL.revokeObjectURL(u)},4000);res()}catch(e){rej(e)}})}};
-document.getElementById('acts').hidden=false;
-document.getElementById('dlnote').textContent='完成後,按上面的按鈕保存結果,再傳給你的諮詢師。也可以直接用手機截圖。';
-(function(){var t=new Date(),p=function(n){return String(n).padStart(2,'0')};
-  document.getElementById('cdate').value=t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate())})();
-setMode('cur');draw();
-</script>
-</body>
-</html>
+function buildPDF(jpg,w,h){
+  const pw=595,ph=Math.round(595*h/w),enc=new TextEncoder(),ch=[],off=[];let len=0;
+  const push=b=>{if(typeof b==='string')b=enc.encode(b);ch.push(b);len+=b.length};
+  const obj=(n,f)=>{off[n]=len;push(n+' 0 obj\n');f();push('\nendobj\n')};
+  push('%PDF-1.4\n');
+  obj(1,()=>push('<</Type/Catalog/Pages 2 0 R>>'));
+  obj(2,()=>push('<</Type/Pages/Kids[3 0 R]/Count 1>>'));
+  obj(3,()=>push(`<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${pw} ${ph}]/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>`));
+  obj(4,()=>{push(`<</Type/XObject/Subtype/Image/Width ${w}/Height ${h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${jpg.length}>>\nstream\n`);push(jpg);push('\nendstream')});
+  const cs=`q ${pw} 0 0 ${ph} 0 0 cm /Im0 Do Q`;
+  obj(5,()=>push(`<</Length ${cs.length}>>\nstream\n${cs}\nendstream`));
+  const x=len;let t='xref\n0 6\n0000000000 65535 f \n';
+  for(let i=1;i<=5;i++)t+=String(off[i]).padStart(10,'0')+' 00000 n \n';
+  push(t+`trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${x}\n%%EOF`);
+  return new Blob(ch,{type:'application/pdf'});
+}
+const DL={save:({filename,data})=>{const u=URL.createObjectURL(data),a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);return Promise.resolve()}};
+function say(t){$('#note').textContent=t}
+async function save(kind){
+  if(!DL)return;
+  const nm=$('#name').value.trim(),base='生命歷程圖'+(nm?'_'+nm:'');
+  try{
+    if(kind==='png'){const r=await toCanvas('image/png');await DL.save({filename:base+'.png',data:r.b})}
+    else{const r=await toCanvas('image/jpeg');const jpg=new Uint8Array(await r.b.arrayBuffer());await DL.save({filename:base+'.pdf',data:buildPDF(jpg,r.w,r.h)})}
+  }catch(err){if(!err||err.code!=='declined')say('無法下載，請直接用手機截圖，再傳給你的諮詢師。')}
+}
+$('#png').onclick=()=>save('png');
+$('#pdf').onclick=()=>save('pdf');
+geo();render();
+</script></body></html>
