@@ -36,6 +36,8 @@ button:disabled{opacity:.45;cursor:default}
 <p class="hint">在圖上空白處點一下新增事件（越高越是高峰，越低越是低谷）；拖曳圓點可調整時間（左右）與高低（上下）。</p>
 
 <div class="form">
+  <label class="l" for="value" style="margin-top:0">我重視/在意的是：</label>
+  <input type="text" id="value" autocomplete="off">
   <label class="l" for="name">姓名(選填,會顯示在圖片上)</label>
   <input type="text" id="name" autocomplete="off">
   <label class="l" for="date">製作日期</label>
@@ -54,6 +56,7 @@ let pts=[],sel=null,uid=1,W=1000,H=640,M=false,G={};
 $('#date').value=new Date().toISOString().slice(0,10);
 const esc=t=>t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const wrap=t=>{const L=[];for(let i=0;i<t.length;i+=7)L.push(t.slice(i,i+7));return L.slice(0,4)};
+const wrapN=t=>{if(!t)return [];t='我重視/在意的是：'+t;const n=M?26:44,L=[];for(let i=0;i<t.length;i+=n)L.push(t.slice(i,i+n));return L.slice(0,2)};
 function geo(){
   M=$('#box').clientWidth<640;W=M?640:1000;H=M?860:640;
   const bx=M?8:26,bw=M?50:62,Y0=M?140:150,Y1=H-50;
@@ -68,7 +71,7 @@ function render(){
   const T=(x,y,sz,t,extra='')=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz}" font-family="${FONT}" ${extra}>${t}</text>`;
   let h=`<rect id="bg" width="${W}" height="${H}" fill="#fff"/>`+
   T(W/2,M?52:62,M?30:38,'生命歷程線',`font-weight="700" fill="#4f7d2a"`)+
-  T(W/2,M?82:92,15,sub,'fill="#777"')+
+  T(W/2,M?82:92,15,sub,'fill="#777"')+wrapN($('#value').value.trim()).map((l,i)=>T(W/2,(M?106:116)+i*20,15,esc(l),'fill="#4f7d2a"')).join('')+
   `<rect x="${bx}" y="${Y0-10}" width="${bw}" height="${Y1-Y0+20}" rx="8" fill="none" stroke="#9db58a" stroke-width="2"/>`+
   T(ax,Y0+30,20,'高','fill="#555"')+T(ax,Y0+56,20,'峰','fill="#555"')+T(ax,Y0+82,22,'＋','fill="#555"')+
   T(ax,Y1-88,20,'低','fill="#555"')+T(ax,Y1-62,20,'谷','fill="#555"')+T(ax,Y1-34,22,'－','fill="#555"')+
@@ -109,11 +112,11 @@ svg.addEventListener('pointerup',e=>{
 svg.addEventListener('pointercancel',()=>{drag=null;tap=null});
 $('#txt').addEventListener('input',e=>{const p=pts.find(q=>q.id===sel);if(p){p.text=e.target.value;render()}});
 $('#del').onclick=()=>{pts=pts.filter(q=>q.id!==sel);sel=null;render()};
-$('#name').oninput=$('#date').oninput=render;
+$('#name').oninput=$('#date').oninput=$('#value').oninput=render;
 let rt=null;
 $('#reset').onclick=function(){
-  if(!pts.length&&!$('#name').value)return;
-  if(this.dataset.arm){pts=[];sel=null;$('#name').value='';delete this.dataset.arm;this.textContent='重新開始';clearTimeout(rt);render();return}
+  if(!pts.length&&!$('#name').value&&!$('#value').value)return;
+  if(this.dataset.arm){pts=[];sel=null;$('#name').value='';$('#value').value='';delete this.dataset.arm;this.textContent='重新開始';clearTimeout(rt);render();return}
   this.dataset.arm=1;this.textContent='再按一次確認清空';
   rt=setTimeout(()=>{delete this.dataset.arm;this.textContent='重新開始'},3000);
 };
